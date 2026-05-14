@@ -28,7 +28,7 @@ public class ProjectUser {
     @Setter
     private Long userId;
 
-    @Column(name = "isAdmin", nullable = false)
+    @Column(name = "is_admin", nullable = false)
     @Setter
     private boolean isAdmin;
 

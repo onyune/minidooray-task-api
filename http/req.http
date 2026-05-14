@@ -1,0 +1,114 @@
+### Variable Definitions
+@baseUrl = http://localhost:8080
+@projectId = 1
+@taskId = 2
+@milestoneId = 1
+@commentId = 3
+@userId = 100
+
+
+### GET: 프로젝트 내 업무 리스트 조회
+GET {{baseUrl}}/projects/{{projectId}}/tasks?page=0&size=10
+X-USER-ID: {{userId}}
+
+### GET: 업무 상세 조회
+GET {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}
+X-USER-ID: {{userId}}
+
+### POST: 업무 등록
+POST {{baseUrl}}/projects/{{projectId}}/tasks
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "taskName": "새로운 업무",
+  "taskContent": "업무 내용 설명입니다.",
+  "milestoneId": null,
+  "tagIds": []
+}
+
+### PUT: 업무 수정
+PUT {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "taskName": "수정된 업무 제목",
+  "taskContent": "수정된 업무 내용입니다.",
+  "milestoneId": 1,
+  "tagIds": [1, 2]
+}
+
+### DELETE: 업무 삭제
+DELETE {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}
+X-USER-ID: {{userId}}
+
+
+### ---------------------------------------------------------
+### Milestone APIs (마일스톤 관리)
+### ---------------------------------------------------------
+
+### GET: 프로젝트 내 마일스톤 목록 조회
+GET {{baseUrl}}/projects/{{projectId}}/milestones
+X-USER-ID: {{userId}}
+
+### POST: 마일스톤 등록
+POST {{baseUrl}}/projects/{{projectId}}/milestones
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "name": "1차 마일스톤",
+  "startAt": "2026-05-14",
+  "endAt": "2026-06-14"
+}
+
+### PUT: 마일스톤 수정
+PUT {{baseUrl}}/projects/{{projectId}}/milestones/{{milestoneId}}
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "name": "수정된 마일스톤",
+  "startAt": "2026-05-15",
+  "endAt": "2026-07-15"
+}
+
+### DELETE: 마일스톤 삭제
+DELETE {{baseUrl}}/projects/{{projectId}}/milestones/{{milestoneId}}
+X-USER-ID: {{userId}}
+
+
+### ---------------------------------------------------------
+###  Comment APIs (코멘트 관리)
+### ---------------------------------------------------------
+
+### GET: 업무 내 코멘트 목록 조회
+GET {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}/comments
+X-USER-ID: {{userId}}
+
+### GET: 코멘트 상세 조회
+GET {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}/comments/{{commentId}}
+X-USER-ID: {{userId}}
+
+### POST: 코멘트 등록
+POST {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}/comments
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "content": "업무에 대한 첫 번째 댓글입니다."
+}
+
+### PUT: 코멘트 수정 (작성자 본인만 가능)
+PUT {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}/comments/{{commentId}}
+X-USER-ID: {{userId}}
+Content-Type: application/json
+
+{
+  "content": "수정된 댓글 내용입니다."
+}
+
+### DELETE: 코멘트 삭제 (작성자 본인만 가능)
+DELETE {{baseUrl}}/projects/{{projectId}}/tasks/{{taskId}}/comments/{{commentId}}
+X-USER-ID: {{userId}}
