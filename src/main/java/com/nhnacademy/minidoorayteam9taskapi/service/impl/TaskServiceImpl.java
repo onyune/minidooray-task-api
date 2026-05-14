@@ -10,6 +10,7 @@ import com.nhnacademy.minidoorayteam9taskapi.entity.Tag;
 import com.nhnacademy.minidoorayteam9taskapi.entity.Task;
 import com.nhnacademy.minidoorayteam9taskapi.entity.TaskTag;
 import com.nhnacademy.minidoorayteam9taskapi.exception.UnauthorizedAccessException;
+import com.nhnacademy.minidoorayteam9taskapi.repository.CommentRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.MilestoneRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectUserRepository;
@@ -34,6 +35,7 @@ public class TaskServiceImpl implements TaskService {
     private final TagRepository tagRepository;
     private final TaskTagRepository taskTagRepository;
     private final ProjectUserRepository projectUserRepository;
+    private final CommentRepository commentRepository;
 
     private void validateProjectMember(Long projectId, Long userId) {
         if (!projectUserRepository.existsByProjectIdAndUserId(projectId, userId)) {
@@ -142,6 +144,7 @@ public class TaskServiceImpl implements TaskService {
     @Transactional
     public void deleteTask(Long projectId, Long taskId, Long userId) {
         validateProjectMember(projectId, userId);
+        commentRepository.deleteByTaskId(taskId);
         taskTagRepository.deleteByTaskId(taskId);
         taskRepository.deleteById(taskId);
     }

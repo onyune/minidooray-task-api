@@ -4,18 +4,19 @@ import com.nhnacademy.minidoorayteam9taskapi.dto.milestone.MilestoneRequest;
 import com.nhnacademy.minidoorayteam9taskapi.dto.milestone.MilestoneResponse;
 import com.nhnacademy.minidoorayteam9taskapi.entity.Milestone;
 import com.nhnacademy.minidoorayteam9taskapi.entity.Project;
+import com.nhnacademy.minidoorayteam9taskapi.entity.Task;
 import com.nhnacademy.minidoorayteam9taskapi.exception.MilestoneNotFoundException;
 import com.nhnacademy.minidoorayteam9taskapi.exception.UnauthorizedAccessException;
 import com.nhnacademy.minidoorayteam9taskapi.repository.MilestoneRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectUserRepository;
+import com.nhnacademy.minidoorayteam9taskapi.repository.TaskRepository;
 import com.nhnacademy.minidoorayteam9taskapi.service.MilestoneService;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class MilestoneServiceImpl implements MilestoneService {
     private final MilestoneRepository milestoneRepository;
     private final ProjectRepository projectRepository;
     private final ProjectUserRepository projectUserRepository;
+    private final TaskRepository taskRepository;
 
     private void validateProjectMember(Long projectId, Long userId) {
         if (!projectUserRepository.existsByProjectIdAndUserId(projectId, userId)) {
@@ -79,6 +81,10 @@ public class MilestoneServiceImpl implements MilestoneService {
         validateProjectMember(projectId, userId);
         if (!milestoneRepository.existsById(milestoneId)) {
             throw new MilestoneNotFoundException(milestoneId);
+        }
+        List<Task> linkedTasks = taskRepository.findAllByMilestoneId(milestoneId);
+        for (Task task : linkedTasks) {
+            task.setMilestone(null);
         }
         milestoneRepository.deleteById(milestoneId);
     }
