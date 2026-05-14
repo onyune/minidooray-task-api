@@ -33,7 +33,7 @@ public class Task {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", nullable = false)
     @Setter
     private Project project;
 
