@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,15 +28,18 @@ public class Comment {
 
     @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     @Setter
+    @NotBlank
     private String content;
 
     @Column(name = "writer_id", nullable = false)
     @Setter
+    @NotNull
     private Long writerId;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
+    @JoinColumn(name = "task_id", nullable = false)
     @Setter
+    @NotNull
     private Task task;
 
     @Builder

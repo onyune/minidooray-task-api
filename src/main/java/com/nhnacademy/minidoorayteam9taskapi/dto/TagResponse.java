@@ -1,3 +1,9 @@
 package com.nhnacademy.minidoorayteam9taskapi.dto;
 
-public record TagResponse(Long tagId, String tagName) {}
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record TagResponse(
+        @NotNull Long tagId,
+        @NotBlank String tagName
+) {}

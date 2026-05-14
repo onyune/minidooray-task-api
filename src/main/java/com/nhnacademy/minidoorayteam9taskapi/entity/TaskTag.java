@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,11 +29,13 @@ public class TaskTag {
     @ManyToOne
     @JoinColumn(name = "task_id")
     @Setter
+    @NotNull
     private Task task;
 
     @ManyToOne
     @JoinColumn(name = "tag_id")
     @Setter
+    @NotNull
     private Tag tag;
 
     @Builder
