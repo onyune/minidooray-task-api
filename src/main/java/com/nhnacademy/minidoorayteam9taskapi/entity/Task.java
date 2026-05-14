@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,15 +29,19 @@ public class Task {
 
     @Column(name = "task_name", nullable = false, length = 100)
     @Setter
+    @NotBlank
+    @Size(min = 1, max = 100)
     private String name;
 
-    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "content", nullable = false, columnDefinition = "LONGTEXT")
     @Setter
+    @NotBlank
     private String content;
 
     @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     @Setter
+    @NotNull
     private Project project;
 
     @ManyToOne

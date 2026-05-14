@@ -9,8 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +30,14 @@ public class Project {
 
     @Column(name = "project_name", nullable = false)
     @Setter
+    @NotBlank
+    @Size(min = 1, max = 255)
     private String name;
 
     @Column(name = "status",nullable = false)
     @Setter
     @Enumerated(EnumType.STRING)
+    @NotNull
     private ProjectStatus status;
 
     @Builder

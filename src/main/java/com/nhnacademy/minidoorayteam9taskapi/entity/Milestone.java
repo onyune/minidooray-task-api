@@ -8,13 +8,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalDate;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,6 +30,8 @@ public class Milestone {
 
     @Column(name = "milestone_name", nullable = false, length = 100)
     @Setter
+    @NotBlank
+    @Size(min = 1, max = 100)
     private String name;
 
     @Column(name = "start_at", columnDefinition = "DATE")
@@ -39,8 +43,9 @@ public class Milestone {
     private LocalDate endAt;
 
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id",nullable = false)
     @Setter
+    @NotNull
     private Project project;
 
     @Builder
