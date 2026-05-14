@@ -6,19 +6,18 @@ import com.nhnacademy.minidoorayteam9taskapi.exception.ProjectUserNotFoundExcept
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectUserRepository;
 import com.nhnacademy.minidoorayteam9taskapi.service.ProjectUserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ProjectUserServiceImpl implements ProjectUserService {
-    @Autowired
-    private ProjectUserRepository projectUserRepository;
+    private final ProjectUserRepository projectUserRepository;
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
     @Override
     @Transactional

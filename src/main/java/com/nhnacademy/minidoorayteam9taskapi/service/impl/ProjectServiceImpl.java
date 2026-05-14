@@ -2,24 +2,23 @@ package com.nhnacademy.minidoorayteam9taskapi.service.impl;
 
 import com.nhnacademy.minidoorayteam9taskapi.entity.Project;
 import com.nhnacademy.minidoorayteam9taskapi.entity.ProjectUser;
-import com.nhnacademy.minidoorayteam9taskapi.entity.enums.ProjectStatus;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectRepository;
 import com.nhnacademy.minidoorayteam9taskapi.repository.ProjectUserRepository;
 import com.nhnacademy.minidoorayteam9taskapi.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
-    @Autowired
-    private ProjectUserRepository projectUserRepository;
+    private final ProjectUserRepository projectUserRepository;
 
     @Override
     @Transactional
@@ -40,12 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     @Transactional(readOnly = true)
     public Project getProject(String projectName) {
-        return projectRepository.getProjectByProjectName(projectName);
+        return projectRepository.getProjectByName(projectName);
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<Project> getProjects(long userId) {
-        return projectRepository.findAllByUserId(userId);
-    }
 }
