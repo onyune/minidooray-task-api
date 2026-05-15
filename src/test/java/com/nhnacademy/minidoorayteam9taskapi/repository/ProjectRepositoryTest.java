@@ -5,8 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.nhnacademy.minidoorayteam9taskapi.entity.Project;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.data.jpa.TestEntityManager;
+import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
+
 
 @DataJpaTest
 class ProjectRepositoryTest {
