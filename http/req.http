@@ -35,7 +35,7 @@ Content-Type: application/json
 {
   "taskName": "수정된 업무 제목",
   "taskContent": "수정된 업무 내용입니다.",
-  "milestoneId": 1,
+  "milestoneId": 3,
   "tagIds": [1, 2]
 }
 

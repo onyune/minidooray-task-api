@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,15 +27,18 @@ public class ProjectUser {
 
     @Column(name = "user_id", nullable = false)
     @Setter
+    @NotNull
     private Long userId;
 
     @Column(name = "is_admin", nullable = false)
     @Setter
+    @NotNull
     private boolean isAdmin;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     @Setter
+    @NotNull
     private Project project;
 
     @Builder
